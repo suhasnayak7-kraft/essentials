@@ -1,0 +1,13 @@
+/*
+  Paste into your shadcn :root block (src/index.css) if you want
+  brand-aligned primary / ring. Optional — kit also works with
+  default shadcn slate primary.
+*/
+
+:root {
+  /* Primary = brand blue #0056c1 */
+  --primary: 214 100% 38%;
+  --primary-foreground: 210 40% 98%;
+  --ring: 214 100% 38%;
+  --radius: 0.5rem;
+}

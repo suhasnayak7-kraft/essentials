@@ -1,0 +1,264 @@
+{
+  "$schema": "./manifest.schema.json",
+  "description": "Selective install manifest — new projects take only what they need via setup/init.sh",
+  "sharedDeps": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.6.0",
+    "class-variance-authority": "^0.7.1",
+    "lucide-react": "^1.21.0"
+  },
+  "layers": {
+    "core": {
+      "label": "Core utilities (always recommended)",
+      "files": [
+        { "from": "lib/utils.ts", "to": "lib/utils.ts" },
+        { "from": "types/components.ts", "to": "types/components.ts" }
+      ],
+      "deps": ["clsx", "tailwind-merge"]
+    },
+    "tokens": {
+      "label": "Design tokens (spacing, typography, tones)",
+      "requires": ["core"],
+      "files": [{ "from": "lib/tokens.ts", "to": "lib/tokens.ts" }],
+      "deps": []
+    },
+    "motion-lib": {
+      "label": "Motion spring presets (patterns + motion components)",
+      "files": [{ "from": "lib/motion.ts", "to": "lib/motion.ts" }],
+      "deps": ["motion"]
+    },
+    "hooks": {
+      "label": "Shared hooks",
+      "files": [{ "from": "hooks/useClickOutside.ts", "to": "hooks/useClickOutside.ts" }],
+      "deps": []
+    }
+  },
+  "ui": {
+    "button": {
+      "file": "components/ui/button.tsx",
+      "deps": ["class-variance-authority", "@radix-ui/react-slot"]
+    },
+    "badge": {
+      "file": "components/ui/badge.tsx",
+      "deps": ["class-variance-authority"]
+    },
+    "card": {
+      "file": "components/ui/card.tsx",
+      "deps": []
+    },
+    "input": {
+      "file": "components/ui/input.tsx",
+      "deps": []
+    },
+    "textarea": {
+      "file": "components/ui/textarea.tsx",
+      "deps": []
+    },
+    "label": {
+      "file": "components/ui/label.tsx",
+      "deps": ["@radix-ui/react-label"]
+    },
+    "checkbox": {
+      "file": "components/ui/checkbox.tsx",
+      "deps": ["@radix-ui/react-checkbox"]
+    },
+    "switch": {
+      "file": "components/ui/switch.tsx",
+      "deps": ["@radix-ui/react-switch"]
+    },
+    "select": {
+      "file": "components/ui/select.tsx",
+      "deps": ["@radix-ui/react-select"]
+    },
+    "dropdown-menu": {
+      "file": "components/ui/dropdown-menu.tsx",
+      "deps": ["@radix-ui/react-dropdown-menu"]
+    },
+    "popover": {
+      "file": "components/ui/popover.tsx",
+      "deps": ["@radix-ui/react-popover"]
+    },
+    "tooltip": {
+      "file": "components/ui/tooltip.tsx",
+      "deps": ["@radix-ui/react-tooltip"]
+    },
+    "dialog": {
+      "file": "components/ui/dialog.tsx",
+      "deps": ["@radix-ui/react-dialog"]
+    },
+    "sheet": {
+      "file": "components/ui/sheet.tsx",
+      "deps": ["@radix-ui/react-dialog"]
+    },
+    "tabs": {
+      "file": "components/ui/tabs.tsx",
+      "deps": ["@radix-ui/react-tabs"]
+    },
+    "avatar": {
+      "file": "components/ui/avatar.tsx",
+      "deps": ["@radix-ui/react-avatar"]
+    },
+    "scroll-area": {
+      "file": "components/ui/scroll-area.tsx",
+      "deps": ["@radix-ui/react-scroll-area"]
+    },
+    "separator": {
+      "file": "components/ui/separator.tsx",
+      "deps": ["@radix-ui/react-separator"]
+    },
+    "alert": {
+      "file": "components/ui/alert.tsx",
+      "deps": ["class-variance-authority"]
+    },
+    "skeleton": {
+      "file": "components/ui/skeleton.tsx",
+      "deps": []
+    },
+    "table": {
+      "file": "components/ui/table.tsx",
+      "deps": []
+    }
+  },
+  "primitives": {
+    "status-badge": {
+      "file": "components/primitives/StatusBadge.tsx",
+      "requires": ["core", "tokens"],
+      "deps": ["class-variance-authority"]
+    },
+    "metric-tile": {
+      "file": "components/primitives/MetricTile.tsx",
+      "requires": ["core", "tokens"],
+      "deps": ["class-variance-authority", "lucide-react"]
+    }
+  },
+  "patterns": {
+    "page-header": {
+      "file": "components/patterns/PageHeader.tsx",
+      "requires": ["core", "tokens"],
+      "deps": []
+    },
+    "section-card": {
+      "file": "components/patterns/SectionCard.tsx",
+      "requires": ["core", "tokens"],
+      "deps": ["class-variance-authority"]
+    },
+    "metric-card": {
+      "file": "components/patterns/MetricCard.tsx",
+      "requires": ["core", "tokens"],
+      "deps": []
+    },
+    "announcement-mic": {
+      "file": "components/patterns/AnnouncementMic.tsx",
+      "requires": ["core", "tokens", "motion-lib", "hooks"],
+      "deps": ["motion", "react-use-measure", "lucide-react"]
+    }
+  },
+  "motion": {
+    "_baseDeps": ["motion"],
+    "_helpers": {
+      "useClickOutside": "components/motion-primitives/useClickOutside.tsx",
+      "usePreventScroll": "components/motion-primitives/usePreventScroll.tsx"
+    },
+    "accordion": { "file": "components/motion-primitives/accordion.tsx" },
+    "animated-background": { "file": "components/motion-primitives/animated-background.tsx" },
+    "animated-group": { "file": "components/motion-primitives/animated-group.tsx" },
+    "animated-number": { "file": "components/motion-primitives/animated-number.tsx" },
+    "border-trail": { "file": "components/motion-primitives/border-trail.tsx" },
+    "carousel": { "file": "components/motion-primitives/carousel.tsx" },
+    "cursor": { "file": "components/motion-primitives/cursor.tsx" },
+    "dialog": {
+      "file": "components/motion-primitives/dialog.tsx",
+      "helpers": ["usePreventScroll"]
+    },
+    "disclosure": { "file": "components/motion-primitives/disclosure.tsx" },
+    "dock": { "file": "components/motion-primitives/dock.tsx" },
+    "glow-effect": { "file": "components/motion-primitives/glow-effect.tsx" },
+    "image-comparison": { "file": "components/motion-primitives/image-comparison.tsx" },
+    "in-view": { "file": "components/motion-primitives/in-view.tsx" },
+    "infinite-slider": {
+      "file": "components/motion-primitives/infinite-slider.tsx",
+      "deps": ["react-use-measure"]
+    },
+    "magnetic": { "file": "components/motion-primitives/magnetic.tsx" },
+    "morphing-dialog": {
+      "file": "components/motion-primitives/morphing-dialog.tsx",
+      "helpers": ["useClickOutside"]
+    },
+    "morphing-popover": {
+      "file": "components/motion-primitives/morphing-popover.tsx",
+      "helpers": ["useClickOutside"]
+    },
+    "progressive-blur": { "file": "components/motion-primitives/progressive-blur.tsx" },
+    "scroll-progress": { "file": "components/motion-primitives/scroll-progress.tsx" },
+    "sliding-number": {
+      "file": "components/motion-primitives/sliding-number.tsx",
+      "deps": ["react-use-measure"]
+    },
+    "spinning-text": { "file": "components/motion-primitives/spinning-text.tsx" },
+    "spotlight": { "file": "components/motion-primitives/spotlight.tsx" },
+    "text-effect": { "file": "components/motion-primitives/text-effect.tsx" },
+    "text-loop": { "file": "components/motion-primitives/text-loop.tsx" },
+    "text-morph": { "file": "components/motion-primitives/text-morph.tsx" },
+    "text-roll": { "file": "components/motion-primitives/text-roll.tsx" },
+    "text-scramble": { "file": "components/motion-primitives/text-scramble.tsx" },
+    "text-shimmer": { "file": "components/motion-primitives/text-shimmer.tsx" },
+    "text-shimmer-wave": { "file": "components/motion-primitives/text-shimmer-wave.tsx" },
+    "tilt": { "file": "components/motion-primitives/tilt.tsx" },
+    "toolbar-dynamic": {
+      "file": "components/motion-primitives/toolbar-dynamic.tsx",
+      "helpers": ["useClickOutside"]
+    },
+    "toolbar-expandable": {
+      "file": "components/motion-primitives/toolbar-expandable.tsx",
+      "helpers": ["useClickOutside"],
+      "deps": ["react-use-measure"]
+    },
+    "transition-panel": { "file": "components/motion-primitives/transition-panel.tsx" }
+  },
+  "presets": {
+    "minimal": {
+      "label": "Forms only — utils + button + input + label",
+      "layers": ["core", "tokens"],
+      "ui": ["button", "input", "label"]
+    },
+    "dashboard": {
+      "label": "SaaS dashboard — common shadcn + kit patterns",
+      "layers": ["core", "tokens", "motion-lib", "hooks"],
+      "ui": [
+        "button",
+        "badge",
+        "card",
+        "input",
+        "label",
+        "select",
+        "dialog",
+        "sheet",
+        "tabs",
+        "table",
+        "skeleton",
+        "avatar",
+        "dropdown-menu",
+        "tooltip"
+      ],
+      "primitives": ["status-badge", "metric-tile"],
+      "patterns": ["page-header", "section-card", "metric-card"],
+      "motion": ["text-loop", "in-view"]
+    },
+    "marketing": {
+      "label": "Landing / hero — motion-heavy, minimal shadcn",
+      "layers": ["core", "tokens", "motion-lib"],
+      "ui": ["button"],
+      "motion": ["text-scramble", "text-loop", "in-view", "glow-effect", "scroll-progress", "animated-group"]
+    },
+    "full-ui": {
+      "label": "All shadcn components in the kit",
+      "layers": ["core", "tokens", "hooks"],
+      "ui": "all"
+    },
+    "full-motion": {
+      "label": "All 33 motion primitives (large — prefer picking individually)",
+      "layers": ["core", "tokens", "motion-lib"],
+      "motion": "all"
+    }
+  }
+}
